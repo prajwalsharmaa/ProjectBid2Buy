@@ -3,27 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Register - Bid2Buy</title>
+	<link rel="stylesheet" href="/css/main.css">
 </head>
-<body>
-    <form action="/register" method="post">
-    <label>First Name:</label><br>
-    <input type="text" name="firstName" required><br><br>
+<body class="register-page">
+	<div class="site-header-simple">
+		<a href="/" class="site-logo">
+			<span class="logo-icon">🔨</span>
+			<span class="logo-text">Bid2Buy</span>
+		</a>
+	</div>
+	<div class="container">
+		<div class="card register-card">
+			<div class="card-header">
+				<h2>Registration Form</h2>
+				<p>Join ProjectBid2Buy today</p>
+			</div>
+			
+			<p th:if="${error.hasError}" th:text="${error.msg}" class="error-message"></p>
+			
+			<form action="/register" method="post" th:object="${registerForm}">
+				<div class="form-group">
+					<label for="firstName">First Name:</label>
+					<input type="text" th:field="*{firstName}" id="firstName" placeholder="Enter your first name">
+				</div>
 
-    <label>Last Name:</label><br>
-    <input type="text" name="lastName" required><br><br>
+				<div class="form-group">
+					<label for="lastName">Last Name:</label>
+					<input type="text" th:field="*{lastName}" id="lastName" placeholder="Enter your last name">
+				</div>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" th:field="*{email}" id="email" placeholder="Enter your email">
+				</div>
 
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input type="password" th:field="*{password}" id="password" placeholder="Enter your password">
+				</div>
 
-    <label>Confirm Password:</label><br>
-    <input type="password" name="confirmPassword" required><br><br>
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password:</label>
+					<input type="password" th:field="*{confirmPassword}" id="confirmPassword" placeholder="Confirm your password">
+				</div>
+				
+				<div class="form-group">
+					<label>Gender:</label>
+					<div class="radio-group">
+						<div class="radio-option">
+							<input type="radio" th:field="*{gender}" id="gender-male" value="MALE">
+							<label for="gender-male">Male</label>
+						</div>
+						<div class="radio-option">
+							<input type="radio" th:field="*{gender}" id="gender-female" value="FEMALE">
+							<label for="gender-female">Female</label>
+						</div>
+					</div>
+				</div>
 
-    <button type="submit">Register</button>
-</form>
-
+				<input type="submit" value="Register">
+			</form>
+			
+			<div class="link-group">
+				Already have an account? <a href="/login">Login here!</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

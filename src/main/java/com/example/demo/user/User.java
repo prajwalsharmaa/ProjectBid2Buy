@@ -1,9 +1,9 @@
-package com.example.demo;
+package com.example.demo.user;
 
 import java.time.Instant;
 
-
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,41 +17,49 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "_user")
 public class User {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
+	
 	@Column(nullable = false)
 	private String firstName;
-
-	@Column(nullable = false)
+	
 	private String lastName;
-
-	@Column(nullable = false)
+	
+	@Column(nullable = false, unique = true)
 	private String username;
-
+	
+	@Column(nullable = false, unique = true)
+	private String email;
+	
 	@Column(nullable = false)
 	private String password;
-
+	
+	private String address;
+	
+	private Integer age;
+	
+	private String profilePicture;
+	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-
+	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserType type;
-
+	
+	@Column(unique = true)
 	private String session;
-
+	
 	@CreationTimestamp
 	private Instant createdAt;
-
-	@CreationTimestamp
+	
+	@UpdateTimestamp
 	private Instant updatedAt;
-
+	
 	public User() {
-
 	}
 
 	public int getId() {
@@ -86,12 +94,36 @@ public class User {
 		this.username = username;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public String getSession() {
@@ -133,5 +165,19 @@ public class User {
 	public void setType(UserType type) {
 		this.type = type;
 	}
+	
+	public Integer getAge() {
+		return age;
+	}
 
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
+	public boolean isProfileComplete() {
+		return address != null && !address.isBlank() 
+			&& age != null && age > 0
+			&& profilePicture != null && !profilePicture.isBlank();
+	}
+	
 }

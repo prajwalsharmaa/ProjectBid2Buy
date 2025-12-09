@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bid2Buy</title>
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+	<div class="site-header-simple">
+		<a href="/" class="site-logo">
+			<span class="logo-icon">🔨</span>
+			<span class="logo-text">Bid2Buy</span>
+		</a>
+	</div>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h2>Login</h2>
+				<p>Welcome back to ProjectBid2Buy</p>
+			</div>
+			
+			<p th:if="${error.hasError}" th:text="${error.msg}" class="error-message"></p>
+			
+			<form action="/login" method="post" th:object="${form}">
+				<div class="form-group">
+					<label for="email">Email or Username:</label>
+					<input type="text" th:field="*{email}" placeholder="Enter email or username" id="email">
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input type="password" th:field="*{password}" id="password" placeholder="Enter your password">
+				</div>
+
+				<input type="submit" value="Login">
+			</form>
+			
+			<div class="link-group">
+				Need an account? <a href="/register">Register here!</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
